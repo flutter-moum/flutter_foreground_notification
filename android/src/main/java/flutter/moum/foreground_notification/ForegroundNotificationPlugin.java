@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.util.Log;
 
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
@@ -16,18 +17,21 @@ import io.flutter.plugin.common.PluginRegistry.Registrar;
 public class ForegroundNotificationPlugin implements MethodCallHandler {
   /** Plugin registration. */
 
+  private static final String TAG = "ForegroundNotificationP";
+
   static Context context;
   public static void registerWith(Registrar registrar) {
     final MethodChannel channel = new MethodChannel(registrar.messenger(), "com.flutter.moum/foreground_notification");
     channel.setMethodCallHandler(new ForegroundNotificationPlugin());
     context = registrar.activeContext();
+    setNotificationChannel();
 
   }
 
-  private void setNotificationChannel() {
+  private static void setNotificationChannel() {
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-      NotificationChannel channel = new NotificationChannel("passionNotification2", "passion", NotificationManager.IMPORTANCE_LOW);
+      NotificationChannel channel = new NotificationChannel("exampleChannelId", "passion", NotificationManager.IMPORTANCE_LOW);
       channel.setDescription("passion indicator notification channel");
       // Register the channel with the system; you can't change the importance
       // or other notification behaviors after this
@@ -40,6 +44,7 @@ public class ForegroundNotificationPlugin implements MethodCallHandler {
   @Override
   public void onMethodCall(MethodCall call, Result result) {
     if (call.method.equals("showNotification")) {
+      Log.d(TAG, "onMethodCall: ");
       Intent serviceIntent = new Intent(context, ForegroundNotificationService.class);
       context.startService(serviceIntent);
 

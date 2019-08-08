@@ -4,11 +4,17 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
+
+import static flutter.moum.foreground_notification.ForegroundNotificationPlugin.context;
 
 public class ForegroundNotificationService extends Service {
 
@@ -36,11 +42,10 @@ public class ForegroundNotificationService extends Service {
 //        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 //        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
-
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, "passionNotification2")
-//                .setSmallIcon(R.drawable.ic_notification_small)
-                .setContentTitle("시간 측정 중")
-                .setContentText("천재는 계속해서 노력할 수 있는 재능이다")
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, "exampleChannelId")
+                .setSmallIcon(R.drawable.ic_launcher)
+                .setContentTitle("서비스 실행중")
+                .setContentText("플러그인의 서비스가 실행중입니다.")
                 .setVibrate(new long[]{ 0 })
 //                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.icon_logo_shadow))
                 .setContentIntent(pendingIntent)
@@ -55,7 +60,8 @@ public class ForegroundNotificationService extends Service {
 //        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
 //        notificationManager.notify(10001, mBuilder.build());
 
-        startForeground(1001, mBuilder.build());
+        Log.d(TAG, "showNotification: builder!!");
+        startForeground(1010, mBuilder.build());
 
     }
 
