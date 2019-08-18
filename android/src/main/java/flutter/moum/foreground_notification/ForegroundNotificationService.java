@@ -36,16 +36,18 @@ public class ForegroundNotificationService extends Service {
     }
 
     private void showNotification() {
-        Intent intent = getPackageManager().getLaunchIntentForPackage("flutter.moum.foreground_notification_example");
+        Intent intent = getPackageManager().getLaunchIntentForPackage(context.getPackageName());
         intent.setAction("SELECT_NOTIFICATION");
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 207, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 //        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 //        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
+        int resourceId = context.getResources().getIdentifier("app_icon", "drawable", context.getPackageName());
+
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, "exampleChannelId")
-                .setSmallIcon(R.drawable.ic_launcher)
-                .setContentTitle("서비스 실행중")
-                .setContentText("플러그인의 서비스가 실행중입니다.")
+                .setSmallIcon(resourceId)
+                .setContentTitle("Songyi Flutter Plugin ...")
+                .setContentText("- You're welcome to customize this area - ")
                 .setVibrate(new long[]{ 0 })
 //                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.icon_logo_shadow))
                 .setContentIntent(pendingIntent)
