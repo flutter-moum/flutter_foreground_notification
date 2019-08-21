@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+typedef OnNotificationCallback = Future<dynamic> Function(String payload);
+
 class ForegroundNotification {
 
   factory ForegroundNotification() => _instance;
@@ -17,10 +19,20 @@ class ForegroundNotification {
 
   final MethodChannel _channel;
 
+  OnNotificationCallback onNotificationCallback;
+
 
   Future<String> get platformVersion async {
     final String version = await _channel.invokeMethod('getPlatformVersion');
     return version;
+  }
+
+  Future<bool> initialize({OnNotificationCallback onNotification}) async {
+    onNotificationCallback = onNotification;
+    _channel.setMethodCallHandler(_handleMethod);
+
+    var result = await _channel.invokeMethod('initialize', {'appIcon': 'appIcon'});
+    return result;
   }
 
   void showAOSNotification() {
@@ -29,4 +41,14 @@ class ForegroundNotification {
   void closeAOSNotification() {
     if (Platform.isAndroid) _channel.invokeMethod("closeNotification");
   }
+
+  Future<void> _handleMethod(MethodCall call) {
+    switch (call.method) {
+      case 'selectNotification':
+        return onNotificationCallback(call.arguments);
+      default:
+        return Future.error('method not defined');
+    }
+  }
+
 }
