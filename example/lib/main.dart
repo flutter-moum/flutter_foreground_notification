@@ -17,7 +17,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    ForegroundNotification.showAOSNotification();
+    ForegroundNotification().showAOSNotification();
 //    initPlatformState();
   }
 
@@ -26,7 +26,7 @@ class _MyAppState extends State<MyApp> {
     String platformVersion;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      platformVersion = await ForegroundNotification.platformVersion;
+      platformVersion = await ForegroundNotification().platformVersion;
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
