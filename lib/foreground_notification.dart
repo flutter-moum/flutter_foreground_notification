@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:foreground_notification/initializationSettings.dart';
 
 typedef OnNotificationCallback = Future<dynamic> Function(String payload);
 
@@ -27,13 +28,23 @@ class ForegroundNotification {
     return version;
   }
 
-  Future<bool> initialize({OnNotificationCallback onNotification}) async {
-    onNotificationCallback = onNotification;
+  Future<bool> initialize({
+    @required OnNotificationCallback selectNotification,
+    @required String title,
+    @required String message,
+    bool useChronometer = false,
+    int when = 0,
+  }) async {
+
+    onNotificationCallback = selectNotification;
     _channel.setMethodCallHandler(_handleMethod);
 
-    var result = await _channel.invokeMethod('initialize', {'appIcon': 'appIcon'});
+    Map<String, dynamic> serializedInitialSettings = InitializationSettings(title, message, useChronometer, when).toMap();
+
+    var result = await _channel.invokeMethod('initialize', serializedInitialSettings);
     return result;
   }
+
 
   void showAOSNotification() {
     if (Platform.isAndroid) _channel.invokeMethod("showNotification");

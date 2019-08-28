@@ -39,8 +39,6 @@ public class ForegroundNotificationService extends Service {
         Intent intent = getPackageManager().getLaunchIntentForPackage(context.getPackageName());
         intent.setAction("SELECT_NOTIFICATION");
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 207, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
         int resourceId = context.getResources().getIdentifier("app_icon", "drawable", context.getPackageName());
 

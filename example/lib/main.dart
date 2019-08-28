@@ -14,10 +14,17 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
 
+  ForegroundNotification foregroundNotification;
+
   @override
   void initState() {
     super.initState();
-    ForegroundNotification().showAOSNotification();
+    foregroundNotification = ForegroundNotification();
+    ForegroundNotification().initialize(
+        selectNotification: null,
+        title: 'Flutter Test',
+        message: 'Flutter Message Body'
+    );
 //    initPlatformState();
   }
 
@@ -51,7 +58,12 @@ class _MyAppState extends State<MyApp> {
         body: Center(
           child: Text('Running on: $_platformVersion\n'),
         ),
+        floatingActionButton: FloatingActionButton(onPressed: () => _show),
       ),
     );
+  }
+
+  _show() {
+    foregroundNotification.showAOSNotification();
   }
 }
