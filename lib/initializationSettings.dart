@@ -9,6 +9,12 @@ class InitializationSettings {
   const InitializationSettings(this.title, this.message, this.useChronometer, this.when);
 
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{'appIcon':'appIcon', 'title': this.title, 'message': this.message, 'useChronometer' : this.useChronometer, 'when' : this.when};
+    return <String, dynamic>{
+      'appIcon':'appIcon',
+      'title': this.title,
+      'message': this.message,
+      'useChronometer' : this.useChronometer,
+      'when' : this.when
+    };
   }
 }

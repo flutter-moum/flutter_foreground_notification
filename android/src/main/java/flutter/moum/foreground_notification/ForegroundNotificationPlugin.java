@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Build;
 import android.util.Log;
 
+import java.util.Map;
+
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
@@ -43,8 +45,18 @@ public class ForegroundNotificationPlugin implements MethodCallHandler {
 
   @Override
   public void onMethodCall(MethodCall call, Result result) {
-    if (call.method.equals("showNotification")) {
-      Log.d(TAG, "onMethodCall: ");
+
+    Log.d(TAG, "onMethodCall: "+call.method);
+
+    if (call.method.equals("initialize")) {
+
+      Map<String, Object> arguments = call.arguments();
+      NotificationDetails.title = (String) arguments.get("title");
+      NotificationDetails.message = (String) arguments.get("message");
+      NotificationDetails.useChronometer = (boolean) arguments.get("useChronometer");
+      NotificationDetails.when = (int) arguments.get("when");
+
+    } else if (call.method.equals("showNotification")) {
       Intent serviceIntent = new Intent(context, ForegroundNotificationService.class);
       context.startService(serviceIntent);
 
