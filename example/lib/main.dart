@@ -42,8 +42,4 @@ class _MyAppState extends State<MyApp> {
       ),
     );
   }
-
-  _show() {
-    foregroundNotification.showAOSNotification();
-  }
 }
