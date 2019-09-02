@@ -59,8 +59,6 @@ class _MyAppState extends State<MyApp> {
             ),
             onPressed: () async {
               var result = await foregroundNotification.closeAOSNotification();
-              print('1111111111');
-              print(result);
               setState(() {
                 isRunning = !isRunning;
               });
@@ -73,8 +71,6 @@ class _MyAppState extends State<MyApp> {
             ),
             onPressed: () async {
               var result = await foregroundNotification.showAOSNotification();
-              print('22222222222');
-              print(result);
               setState(() {
                 isRunning = !isRunning;
               });
