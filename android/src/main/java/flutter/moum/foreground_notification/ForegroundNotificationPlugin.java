@@ -54,7 +54,7 @@ public class ForegroundNotificationPlugin implements MethodCallHandler {
       NotificationDetails.title = (String) arguments.get("title");
       NotificationDetails.message = (String) arguments.get("message");
       NotificationDetails.useChronometer = (boolean) arguments.get("useChronometer");
-      NotificationDetails.when = (int) arguments.get("when");
+      NotificationDetails.when = (long) arguments.get("when");
 
     } else if (call.method.equals("showNotification")) {
       Intent serviceIntent = new Intent(context, ForegroundNotificationService.class);

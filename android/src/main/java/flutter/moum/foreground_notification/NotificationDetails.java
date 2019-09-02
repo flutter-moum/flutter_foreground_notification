@@ -4,6 +4,6 @@ public class NotificationDetails {
     public static String title;
     public static String message;
     public static boolean useChronometer = false;
-    public static int when = 0;
+    public static long when = 0;
 
 }
