@@ -18,10 +18,14 @@ To use this plugin, add `foreground_service_notification` as a [dependency in yo
     foregroundNotification = ForegroundNotification();
     ForegroundNotification().initialize(
       selectNotification: null,
-      title: 'Flutter Notification Title', // input your notification title
-      message: 'Flutter Message Body', // input your notification message body
-      useChronometer: false, // if you need chronometer, set value true (* chronometer is an extremely accurate clock)
-      when: DateTime.now().millisecondsSinceEpoch, // if you set chronometer true, set the time you want to start
+      // input your notification title
+      title: 'Flutter Notification Title',
+      // input your notification message body
+      message: 'Flutter Message Body',
+      // if you need chronometer, set value true (* chronometer is an extremely accurate clock)
+      useChronometer: false,
+      // if you set chronometer true, set the time you want to start
+      when: DateTime.now().millisecondsSinceEpoch,
     );
 
     /// show notification
