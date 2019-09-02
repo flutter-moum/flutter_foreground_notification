@@ -59,11 +59,13 @@ public class ForegroundNotificationPlugin implements MethodCallHandler {
     } else if (call.method.equals("showNotification")) {
       Intent serviceIntent = new Intent(context, ForegroundNotificationService.class);
       context.startService(serviceIntent);
+      result.success(true);
+
 
     } else if (call.method.equals("closeNotification")) {
       Intent closeIntent = new Intent(context, ForegroundNotificationService.class);
       context.stopService(closeIntent);
-
+      result.success(true);
     } else {
       result.notImplemented();
     }
