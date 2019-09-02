@@ -22,6 +22,9 @@ class ForegroundNotification {
 
   OnNotificationCallback onNotificationCallback;
 
+  bool _isShowing;
+
+  bool get isShowing => _isShowing;
 
   Future<String> get platformVersion async {
     final String version = await _channel.invokeMethod('getPlatformVersion');
@@ -46,11 +49,22 @@ class ForegroundNotification {
   }
 
 
-  void showAOSNotification() {
-    if (Platform.isAndroid) _channel.invokeMethod("showNotification");
+  Future<bool> showAOSNotification() async {
+    if (Platform.isAndroid) {
+      var result = await _channel.invokeMethod("showNotification");
+      if (result) _isShowing = true;
+      return result;
+    }
+    return Future.value(false);
   }
-  void closeAOSNotification() {
-    if (Platform.isAndroid) _channel.invokeMethod("closeNotification");
+
+  Future<bool> closeAOSNotification() async {
+    if (Platform.isAndroid) {
+      var result = await _channel.invokeMethod("closeNotification");
+      if (result) _isShowing = false;
+      return result;
+    }
+    return Future.value(false);
   }
 
   Future<void> _handleMethod(MethodCall call) {
