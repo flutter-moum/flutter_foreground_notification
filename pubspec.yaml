@@ -1,6 +1,6 @@
 name: foreground_notification
 description: A flutter plugin for customizing "forground service" notification with chronometer. (iOS is not supported)
-version: 0.1.0
+version: 0.2.0
 author: songyiYu<songyi0207@gmail.com>, Flutter Moum<fluttermoum@gmail.com>
 homepage: https://github.com/flutter-moum/flutter_foreground_notification
 

@@ -1,5 +1,7 @@
 # Foreground Service Notification Plugin
 
+**Migrate to AndroidX**
+
 A Flutter plugin to show forground service notification and customize it. (iOS is not supported)
 
 If you need present that your app is running as a service in user's phone, you can use this plugin.
