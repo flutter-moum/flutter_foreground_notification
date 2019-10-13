@@ -40,7 +40,7 @@ To use this plugin, add `foreground_service_notification` as a [dependency in yo
 When you set the `useChronometer` true and set the start time, the seconds start to move from the time you set.
 if you do not set the start time(`when` field), it is initialized to current time.
 
-** If you want to show this notification, you first set up your app icon image in folder `your_app/android/app/src/main/res/drawable/app_icon.png`
+**If you want to show this notification, you first set up your app icon image in folder `your_app/android/app/src/main/res/drawable/app_icon.png`
 Image must be named 'app_icon.png'**
 
  - [x] Chronometer
